@@ -1,12 +1,13 @@
 import { eq, desc, and, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { 
-  InsertUser, users, 
+import {
+  InsertUser, users,
   campaigns, Campaign, InsertCampaign,
   leads, Lead, InsertLead,
   contents, Content, InsertContent,
   notifications, Notification, InsertNotification,
-  rateLimits, RateLimit, InsertRateLimit
+  rateLimits, RateLimit, InsertRateLimit,
+  platformConnections, PlatformConnection
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
@@ -116,16 +117,16 @@ export async function updateUserProfile(userId: number, profile: Partial<InsertU
 }
 
 export async function updateLinkedInTokens(
-  userId: number, 
-  accessToken: string, 
-  refreshToken: string, 
+  userId: number,
+  accessToken: string,
+  refreshToken: string,
   expiresIn: number
 ) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
 
   const expiry = new Date(Date.now() + expiresIn * 1000);
-  
+
   await db.update(users).set({
     linkedinAccessToken: accessToken,
     linkedinRefreshToken: refreshToken,
@@ -348,7 +349,7 @@ export async function incrementPostCount(userId: number) {
   if (!db) throw new Error("Database not available");
 
   const existing = await getRateLimit(userId);
-  
+
   if (!existing) {
     await db.insert(rateLimits).values({
       userId,
@@ -394,7 +395,7 @@ export async function getDashboardMetrics(userId: number) {
     .from(contents)
     .where(and(eq(contents.userId, userId), eq(contents.status, 'published')));
 
-  const [engagementResult] = await db.select({ 
+  const [engagementResult] = await db.select({
     totalLikes: sql<number>`sum(${contents.likes})`,
     totalComments: sql<number>`sum(${contents.comments})`,
     totalShares: sql<number>`sum(${contents.shares})`,
@@ -402,12 +403,54 @@ export async function getDashboardMetrics(userId: number) {
   }).from(contents).where(eq(contents.userId, userId));
 
   return {
-    totalLeads: Number(totalLeadsResult?.count || 0),
-    totalContents: Number(totalContentsResult?.count || 0),
-    totalPublished: Number(publishedResult?.count || 0),
-    totalLikes: Number(engagementResult?.totalLikes || 0),
-    totalComments: Number(engagementResult?.totalComments || 0),
     totalShares: Number(engagementResult?.totalShares || 0),
     totalImpressions: Number(engagementResult?.totalImpressions || 0),
   };
+}
+
+// ============================================================================
+// PLATFORM CONNECTIONS
+// ============================================================================
+
+export async function savePlatformConnection(
+  userId: number,
+  platform: string,
+  apiKeyEncrypted: string,
+  config?: any
+) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  // Check if exists
+  const existing = await db.select().from(platformConnections)
+    .where(and(eq(platformConnections.userId, userId), eq(platformConnections.platform, platform)))
+    .limit(1);
+
+  if (existing.length > 0) {
+    await db.update(platformConnections).set({
+      apiKeyEncrypted,
+      config,
+      updatedAt: new Date(),
+    }).where(eq(platformConnections.id, existing[0].id));
+  } else {
+    await db.insert(platformConnections).values({
+      userId,
+      platform,
+      apiKeyEncrypted,
+      config,
+      isValid: true, // Optimistic, should be validated
+      lastCheckedAt: new Date(),
+    });
+  }
+}
+
+export async function getPlatformConnection(userId: number, platform: string) {
+  const db = await getDb();
+  if (!db) return undefined;
+
+  const result = await db.select().from(platformConnections)
+    .where(and(eq(platformConnections.userId, userId), eq(platformConnections.platform, platform)))
+    .limit(1);
+
+  return result.length > 0 ? result[0] : undefined;
 }

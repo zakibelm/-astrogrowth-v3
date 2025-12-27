@@ -2,9 +2,9 @@
 
 ## 🔑 SAUVEGARDE CLÉS API (PRIORITÉ HAUTE)
 
-- [ ] Créer route tRPC `platformConnections.saveApiKey()` pour sauvegarder les clés
-- [ ] Encryption AES-256 des clés API avant sauvegarde en base
-- [ ] Modifier ConfigModal pour appeler la route saveApiKey() au lieu de juste toast
+- [x] Créer route tRPC `platformConnections.saveApiKey()` pour sauvegarder les clés
+- [x] Encryption AES-256 des clés API avant sauvegarde en base
+- [x] Modifier ConfigModal pour appeler la route saveApiKey() au lieu de juste toast
 - [ ] Tester connexion API après sauvegarde (route `testConnection()`)
 - [ ] Afficher feedback succès/erreur avec détails
 

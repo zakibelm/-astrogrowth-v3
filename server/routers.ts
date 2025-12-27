@@ -8,7 +8,7 @@ import * as dbAgents from "./db-agents";
 
 export const appRouter = router({
   system: systemRouter,
-  
+
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {
@@ -25,7 +25,7 @@ export const appRouter = router({
     get: protectedProcedure.query(async ({ ctx }) => {
       return await db.getUserById(ctx.user.id);
     }),
-    
+
     update: protectedProcedure
       .input(z.object({
         businessName: z.string().optional(),
@@ -45,13 +45,13 @@ export const appRouter = router({
     list: protectedProcedure.query(async ({ ctx }) => {
       return await db.getCampaignsByUserId(ctx.user.id);
     }),
-    
+
     get: protectedProcedure
       .input(z.object({ id: z.number() }))
       .query(async ({ input }) => {
         return await db.getCampaignById(input.id);
       }),
-    
+
     create: protectedProcedure
       .input(z.object({
         name: z.string().min(1),
@@ -64,7 +64,7 @@ export const appRouter = router({
           ...input,
           status: 'draft',
         });
-        
+
         // Create notification
         await db.createNotification({
           userId: ctx.user.id,
@@ -73,10 +73,10 @@ export const appRouter = router({
           message: `La campagne "${input.name}" a été créée avec succès.`,
           campaignId,
         });
-        
+
         return { id: campaignId };
       }),
-    
+
     updateStatus: protectedProcedure
       .input(z.object({
         id: z.number(),
@@ -95,7 +95,7 @@ export const appRouter = router({
       .query(async ({ input }) => {
         return await db.getLeadsByCampaignId(input.campaignId);
       }),
-    
+
     get: protectedProcedure
       .input(z.object({ id: z.number() }))
       .query(async ({ input }) => {
@@ -110,26 +110,26 @@ export const appRouter = router({
       .query(async ({ input }) => {
         return await db.getContentsByCampaignId(input.campaignId);
       }),
-    
+
     listByUser: protectedProcedure
       .input(z.object({ status: z.string().optional() }))
       .query(async ({ ctx, input }) => {
         return await db.getContentsByUserId(ctx.user.id, input.status);
       }),
-    
+
     get: protectedProcedure
       .input(z.object({ id: z.number() }))
       .query(async ({ input }) => {
         return await db.getContentById(input.id);
       }),
-    
+
     approve: protectedProcedure
       .input(z.object({ id: z.number() }))
       .mutation(async ({ input }) => {
         await db.approveContent(input.id);
         return { success: true };
       }),
-    
+
     reject: protectedProcedure
       .input(z.object({ id: z.number() }))
       .mutation(async ({ input }) => {
@@ -145,7 +145,7 @@ export const appRouter = router({
       .query(async ({ ctx, input }) => {
         return await db.getNotificationsByUserId(ctx.user.id, input.unreadOnly);
       }),
-    
+
     markAsRead: protectedProcedure
       .input(z.object({ id: z.number() }))
       .mutation(async ({ input }) => {
@@ -211,19 +211,44 @@ export const appRouter = router({
 
   // Platform connections management
   platformConnections: router({
+    saveApiKey: protectedProcedure
+      .input(z.object({
+        platform: z.string(),
+        apiKey: z.string(),
+        config: z.record(z.string(), z.any()).optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        const { encrypt } = await import('./utils/encryption');
+        const encryptedKey = encrypt(input.apiKey);
+
+        await db.savePlatformConnection(
+          ctx.user.id,
+          input.platform,
+          encryptedKey,
+          input.config
+        );
+
+        return { success: true };
+      }),
+
     getStatus: protectedProcedure.query(async ({ ctx }) => {
       const user = await db.getUserById(ctx.user.id);
       if (!user) throw new Error('User not found');
-      
+
+      const openrouter = await db.getPlatformConnection(ctx.user.id, 'openrouter');
+      const googlemaps = await db.getPlatformConnection(ctx.user.id, 'googlemaps');
+      const imagen = await db.getPlatformConnection(ctx.user.id, 'imagen3');
+      const linkedin = await db.getPlatformConnection(ctx.user.id, 'linkedin'); // Can also check user.linkedinConnected
+
       return {
         linkedin: {
-          connected: user.linkedinConnected || false,
+          connected: user.linkedinConnected || (linkedin?.isValid ?? false),
           status: user.linkedinConnected ? 'connected' : 'disconnected',
         },
         openrouter: {
-          connected: true, // TODO: Check from platform_connections table
-          status: 'connected',
-          usage: '1.2M tokens ce mois',
+          connected: openrouter?.isValid ?? false,
+          status: openrouter?.isValid ? 'connected' : 'disconnected',
+          usage: '1.2M tokens ce mois', // TODO: Implement real usage tracking
           credits: '$42.30 restants',
         },
         huggingface: {
@@ -239,33 +264,34 @@ export const appRouter = router({
           credits: 'Gratuit',
         },
         imagen: {
-          connected: true,
-          status: 'connected',
+          connected: imagen?.isValid ?? false,
+          status: imagen?.isValid ? 'connected' : 'disconnected',
           usage: '45/1000 images',
           credits: '$15.80 restants',
         },
         googlemaps: {
-          connected: true,
-          status: 'connected',
+          connected: googlemaps?.isValid ?? false,
+          status: googlemaps?.isValid ? 'connected' : 'disconnected',
           usage: '1,250 requêtes',
           credits: '$8.50 restants',
         },
       };
     }),
-    
+
     disconnect: protectedProcedure
       .input(z.object({ platform: z.string() }))
       .mutation(async ({ ctx, input }) => {
-        // TODO: Implement disconnect logic
+        // TODO: Implement disconnect logic (delete or clear key)
         return { success: true, message: `Déconnecté de ${input.platform}` };
       }),
   }),
 
   // AI Agents management
-  agents: router({    list: protectedProcedure.query(async ({ ctx }) => {
+  agents: router({
+    list: protectedProcedure.query(async ({ ctx }) => {
       return await dbAgents.getUserAgents(ctx.user.id);
     }),
-    
+
     toggle: protectedProcedure
       .input(z.object({
         agentId: z.string(),
@@ -274,7 +300,7 @@ export const appRouter = router({
       .mutation(async ({ ctx, input }) => {
         return await dbAgents.toggleUserAgent(ctx.user.id, input.agentId, input.enabled);
       }),
-    
+
     updateConfig: protectedProcedure
       .input(z.object({
         agentId: z.string(),
@@ -294,7 +320,7 @@ export const appRouter = router({
     list: publicProcedure.query(async () => {
       return await dbAgents.getAllWorkflows();
     }),
-    
+
     activate: protectedProcedure
       .input(z.object({
         workflowId: z.number(),
@@ -328,7 +354,7 @@ export const appRouter = router({
       .mutation(async ({ ctx, input }) => {
         return await dbAgents.activateWorkflow(ctx.user.id, input.workflowId, input.config);
       }),
-    
+
     deactivate: protectedProcedure
       .input(z.object({
         workflowId: z.number(),
@@ -336,7 +362,7 @@ export const appRouter = router({
       .mutation(async ({ ctx, input }) => {
         return await dbAgents.deactivateWorkflow(ctx.user.id, input.workflowId);
       }),
-    
+
     getUserWorkflows: protectedProcedure.query(async ({ ctx }) => {
       return await dbAgents.getUserWorkflows(ctx.user.id);
     }),
