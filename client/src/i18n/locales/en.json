@@ -32,6 +32,157 @@
       "agents": "Agents",
       "pricing": "Pricing",
       "getStarted": "Get Started"
+    },
+    "features": {
+      "badge": "🎯 Complete Automation",
+      "titlePre": "Everything you need to",
+      "titleGradient": "dominate your market",
+      "subtitle": "A comprehensive platform managing every aspect of your digital marketing, end-to-end",
+      "astroleads": {
+        "title": "AstroLeads",
+        "description": "Automated lead generation with Google Maps scraping and intelligent enrichment worldwide",
+        "items": {
+          "scraping": "Automatic Google Maps scraping",
+          "enrichment": "Smart data enrichment",
+          "scoring": "Prospect validation & scoring",
+          "crm": "Integrated CRM export"
+        }
+      },
+      "astromedia": {
+        "title": "AstroMedia",
+        "description": "AI-powered professional marketing content creation, ready to publish in seconds"
+      },
+      "distribution": {
+        "title": "LinkedIn Distribution",
+        "description": "Smart automatic LinkedIn publishing with optimized timing",
+        "items": {
+          "scheduling": "Scheduled auto-publishing",
+          "timing": "Timing optimization",
+          "multiAccount": "Multi-account management"
+        }
+      },
+      "agents": {
+        "title": "48 Specialized AI Agents",
+        "description": "A complete AI team working 24/7 to grow your business",
+        "items": {
+          "content": "Content creation genius",
+          "hunting": "Lead hunting specialist",
+          "publishing": "Distribution publisher",
+          "optimization": "Continuous optimization"
+        }
+      }
+    },
+    "agentsShowcase": {
+      "badge": "🤖 Artificial Intelligence",
+      "titlePre": "Meet your",
+      "titleGradient": "AI Agents",
+      "subtitle": "48 specialized agents working together to automate your marketing",
+      "roles": {
+        "content": {
+          "name": "Content Genius",
+          "role": "Content Creation",
+          "desc": "Generates personalized, engaging marketing content in all major world languages"
+        },
+        "hunter": {
+          "name": "Lead Hunter",
+          "role": "Smart Prospecting",
+          "desc": "Automatically finds and qualifies the best prospects for your business"
+        },
+        "publisher": {
+          "name": "Social Publisher",
+          "role": "Auto Distribution",
+          "desc": "Publishes your content at optimal times across all social networks"
+        },
+        "analytics": {
+          "name": "Analytics Pro",
+          "role": "Continuous Optimization",
+          "desc": "Analyzes performance and automatically optimizes your marketing campaigns"
+        },
+        "manager": {
+          "name": "Campaign Manager",
+          "role": "Complete Orchestration",
+          "desc": "Coordinates all your agents to create coherent, effective marketing campaigns"
+        },
+        "strategy": {
+          "name": "Strategy Advisor",
+          "role": "Strategic Insights",
+          "desc": "Analyzes your market and recommends the best strategies to achieve your goals"
+        }
+      }
+    },
+    "pricing": {
+      "badge": "💰 Simple Pricing",
+      "titlePre": "Choose your",
+      "titleGradient": "Perfect Plan",
+      "subtitle": "Transparent, accessible pricing for businesses of all sizes",
+      "month": "/month",
+      "starter": {
+        "title": "Starter",
+        "cta": "Get Started",
+        "features": [
+          "10 active AI agents",
+          "500 leads/month",
+          "50 content pieces/month",
+          "2 LinkedIn accounts",
+          "Email support"
+        ]
+      },
+      "pro": {
+        "tag": "🔥 POPULAR",
+        "title": "Professional",
+        "cta": "Start Now",
+        "features": [
+          "48 active AI agents",
+          "2,000 leads/month",
+          "200 content pieces/month",
+          "10 LinkedIn accounts",
+          "24/7 priority support",
+          "Custom training"
+        ]
+      },
+      "enterprise": {
+        "title": "Enterprise",
+        "price": "Custom",
+        "period": "/tailored",
+        "cta": "Contact Us",
+        "features": [
+          "Unlimited AI agents",
+          "Unlimited leads",
+          "Unlimited content",
+          "Unlimited accounts",
+          "Dedicated account manager",
+          "99.9% SLA guaranteed",
+          "Custom integrations"
+        ]
+      }
+    },
+    "megaCta": {
+      "title": "Ready to Transform Your Marketing?",
+      "subtitle": "Join businesses that have multiplied their growth by 10x with AstroGrowth, worldwide",
+      "cta": "🚀 Start Free - No Credit Card Required"
+    },
+    "footer": {
+      "description": "The AI-powered marketing automation platform for all businesses. From prospecting to conversion on autopilot, worldwide.",
+      "columns": {
+        "product": "Product",
+        "resources": "Resources",
+        "company": "Company"
+      },
+      "links": {
+        "features": "Features",
+        "agents": "AI Agents",
+        "pricing": "Pricing",
+        "integrations": "Integrations",
+        "docs": "Documentation",
+        "blog": "Blog",
+        "cases": "Case Studies",
+        "support": "Support",
+        "about": "About",
+        "careers": "Careers",
+        "contact": "Contact",
+        "legal": "Legal"
+      },
+      "copyright": "Powered by"
     }
   },
   "dashboard": {

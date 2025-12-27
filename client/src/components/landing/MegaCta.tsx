@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 import { Link } from "wouter";
 import { getLoginUrl } from "@/const";
+import { useTranslation } from 'react-i18next';
 
 export default function MegaCta() {
+    const { t } = useTranslation();
     return (
         <section className="py-20 px-8 max-w-[1400px] mx-auto z-10 relative">
             <motion.div
@@ -15,14 +17,14 @@ export default function MegaCta() {
 
                 <div className="relative z-10">
                     <h2 className="text-4xl md:text-6xl font-black text-white mb-8 drop-shadow-md">
-                        Ready to Transform Your Marketing?
+                        {t('landing.megaCta.title')}
                     </h2>
                     <p className="text-xl md:text-2xl text-white/90 max-w-[800px] mx-auto mb-12 font-medium leading-relaxed">
-                        Join businesses that have multiplied their growth by 10x with AstroGrowth, worldwide
+                        {t('landing.megaCta.subtitle')}
                     </p>
                     <Link href="/dashboard">
                         <button className="bg-white text-emerald-600 text-lg md:text-xl font-bold py-6 px-16 rounded-full shadow-xl hover:shadow-2xl hover:scale-105 hover:-translate-y-2 transition-all duration-300">
-                            🚀 Start Free - No Credit Card Required
+                            {t('landing.megaCta.cta')}
                         </button>
                     </Link>
                 </div>

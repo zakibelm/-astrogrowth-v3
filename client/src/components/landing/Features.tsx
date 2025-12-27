@@ -1,18 +1,20 @@
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 export default function Features() {
+    const { t } = useTranslation();
     return (
         <section className="section py-32 px-8 max-w-[1400px] mx-auto z-10 relative" id="features">
             <div className="text-center mb-20">
                 <div className="inline-block bg-emerald-500/10 border-2 border-emerald-500/30 text-emerald-600 px-6 py-3 rounded-full font-bold mb-6">
-                    🎯 Complete Automation
+                    {t('landing.features.badge')}
                 </div>
                 <h2 className="section-title">
-                    Everything you need to<br />
-                    <span className="text-gradient">dominate your market</span>
+                    {t('landing.features.titlePre')}<br />
+                    <span className="text-gradient">{t('landing.features.titleGradient')}</span>
                 </h2>
                 <p className="text-xl text-gray-500 max-w-[700px] mx-auto">
-                    A comprehensive platform managing every aspect of your digital marketing, end-to-end
+                    {t('landing.features.subtitle')}
                 </p>
             </div>
 
@@ -22,15 +24,15 @@ export default function Features() {
                     className="bg-white rounded-[32px] p-12 shadow-sm border border-black/5 md:col-span-8"
                 >
                     <div className="text-6xl mb-8">🔍</div>
-                    <h3 className="text-3xl font-bold mb-6 text-gray-900">AstroLeads</h3>
+                    <h3 className="text-3xl font-bold mb-6 text-gray-900">{t('landing.features.astroleads.title')}</h3>
                     <p className="text-lg text-gray-500 mb-8 leading-relaxed">
-                        Automated lead generation with Google Maps scraping and intelligent enrichment worldwide
+                        {t('landing.features.astroleads.description')}
                     </p>
                     <ul className="feature-list space-y-4">
-                        <li className="flex items-center gap-4 text-gray-600 font-medium">Automatic Google Maps scraping</li>
-                        <li className="flex items-center gap-4 text-gray-600 font-medium">Smart data enrichment</li>
-                        <li className="flex items-center gap-4 text-gray-600 font-medium">Prospect validation & scoring</li>
-                        <li className="flex items-center gap-4 text-gray-600 font-medium">Integrated CRM export</li>
+                        <li className="flex items-center gap-4 text-gray-600 font-medium">{t('landing.features.astroleads.items.scraping')}</li>
+                        <li className="flex items-center gap-4 text-gray-600 font-medium">{t('landing.features.astroleads.items.enrichment')}</li>
+                        <li className="flex items-center gap-4 text-gray-600 font-medium">{t('landing.features.astroleads.items.scoring')}</li>
+                        <li className="flex items-center gap-4 text-gray-600 font-medium">{t('landing.features.astroleads.items.crm')}</li>
                     </ul>
                 </motion.div>
 
@@ -39,9 +41,9 @@ export default function Features() {
                     className="bg-white rounded-[32px] p-12 shadow-sm border border-black/5 md:col-span-4"
                 >
                     <div className="text-6xl mb-8">✨</div>
-                    <h3 className="text-3xl font-bold mb-6 text-gray-900">AstroMedia</h3>
+                    <h3 className="text-3xl font-bold mb-6 text-gray-900">{t('landing.features.astromedia.title')}</h3>
                     <p className="text-lg text-gray-500 leading-relaxed">
-                        AI-powered professional marketing content creation, ready to publish in seconds
+                        {t('landing.features.astromedia.description')}
                     </p>
                 </motion.div>
 
@@ -50,14 +52,14 @@ export default function Features() {
                     className="bg-white rounded-[32px] p-12 shadow-sm border border-black/5 md:col-span-6"
                 >
                     <div className="text-6xl mb-8">💼</div>
-                    <h3 className="text-3xl font-bold mb-6 text-gray-900">LinkedIn Distribution</h3>
+                    <h3 className="text-3xl font-bold mb-6 text-gray-900">{t('landing.features.distribution.title')}</h3>
                     <p className="text-lg text-gray-500 mb-8 leading-relaxed">
-                        Smart automatic LinkedIn publishing with optimized timing
+                        {t('landing.features.distribution.description')}
                     </p>
                     <ul className="feature-list space-y-4">
-                        <li className="flex items-center gap-4 text-gray-600 font-medium">Scheduled auto-publishing</li>
-                        <li className="flex items-center gap-4 text-gray-600 font-medium">Timing optimization</li>
-                        <li className="flex items-center gap-4 text-gray-600 font-medium">Multi-account management</li>
+                        <li className="flex items-center gap-4 text-gray-600 font-medium">{t('landing.features.distribution.items.scheduling')}</li>
+                        <li className="flex items-center gap-4 text-gray-600 font-medium">{t('landing.features.distribution.items.timing')}</li>
+                        <li className="flex items-center gap-4 text-gray-600 font-medium">{t('landing.features.distribution.items.multiAccount')}</li>
                     </ul>
                 </motion.div>
 
@@ -66,15 +68,15 @@ export default function Features() {
                     className="bg-white rounded-[32px] p-12 shadow-sm border border-black/5 md:col-span-6"
                 >
                     <div className="text-6xl mb-8">🤖</div>
-                    <h3 className="text-3xl font-bold mb-6 text-gray-900">48 Specialized AI Agents</h3>
+                    <h3 className="text-3xl font-bold mb-6 text-gray-900">{t('landing.features.agents.title')}</h3>
                     <p className="text-lg text-gray-500 mb-8 leading-relaxed">
-                        A complete AI team working 24/7 to grow your business
+                        {t('landing.features.agents.description')}
                     </p>
                     <ul className="feature-list space-y-4">
-                        <li className="flex items-center gap-4 text-gray-600 font-medium">Content creation genius</li>
-                        <li className="flex items-center gap-4 text-gray-600 font-medium">Lead hunting specialist</li>
-                        <li className="flex items-center gap-4 text-gray-600 font-medium">Distribution publisher</li>
-                        <li className="flex items-center gap-4 text-gray-600 font-medium">Continuous optimization</li>
+                        <li className="flex items-center gap-4 text-gray-600 font-medium">{t('landing.features.agents.items.content')}</li>
+                        <li className="flex items-center gap-4 text-gray-600 font-medium">{t('landing.features.agents.items.hunting')}</li>
+                        <li className="flex items-center gap-4 text-gray-600 font-medium">{t('landing.features.agents.items.publishing')}</li>
+                        <li className="flex items-center gap-4 text-gray-600 font-medium">{t('landing.features.agents.items.optimization')}</li>
                     </ul>
                 </motion.div>
             </div>

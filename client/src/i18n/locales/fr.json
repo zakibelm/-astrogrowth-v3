@@ -32,6 +32,157 @@
       "agents": "Agents",
       "pricing": "Tarifs",
       "getStarted": "Commencer"
+    },
+    "features": {
+      "badge": "🎯 Automatisation Complète",
+      "titlePre": "Tout ce dont vous avez besoin pour",
+      "titleGradient": "dominer votre marché",
+      "subtitle": "Une plateforme complète gérant chaque aspect de votre marketing digital, de A à Z",
+      "astroleads": {
+        "title": "AstroLeads",
+        "description": "Génération de leads automatisée avec scraping Google Maps et enrichissement intelligent mondial",
+        "items": {
+          "scraping": "Scraping Google Maps automatique",
+          "enrichment": "Enrichissement de données intelligent",
+          "scoring": "Validation et scoring des prospects",
+          "crm": "Export CRM intégré"
+        }
+      },
+      "astromedia": {
+        "title": "AstroMedia",
+        "description": "Création de contenu marketing professionnel par IA, prêt à publier en quelques secondes"
+      },
+      "distribution": {
+        "title": "Distribution LinkedIn",
+        "description": "Publication automatique intelligente sur LinkedIn avec timing optimisé",
+        "items": {
+          "scheduling": "Auto-publication planifiée",
+          "timing": "Optimisation du timing",
+          "multiAccount": "Gestion multi-comptes"
+        }
+      },
+      "agents": {
+        "title": "48 Agents IA Spécialisés",
+        "description": "Une équipe IA complète travaillant 24/7 pour faire croître votre entreprise",
+        "items": {
+          "content": "Génie de la création de contenu",
+          "hunting": "Spécialiste chasseur de leads",
+          "publishing": "Diffuseur de contenu",
+          "optimization": "Optimisation continue"
+        }
+      }
+    },
+    "agentsShowcase": {
+      "badge": "🤖 Intelligence Artificielle",
+      "titlePre": "Rencontrez vos",
+      "titleGradient": "Agents IA",
+      "subtitle": "48 agents spécialisés travaillant ensemble pour automatiser votre marketing",
+      "roles": {
+        "content": {
+          "name": "Génie du Contenu",
+          "role": "Création de Contenu",
+          "desc": "Génère du contenu marketing engageant et personnalisé dans toutes les langues"
+        },
+        "hunter": {
+          "name": "Chasseur de Leads",
+          "role": "Prospection Intelligente",
+          "desc": "Trouve et qualifie automatiquement les meilleurs prospects pour votre entreprise"
+        },
+        "publisher": {
+          "name": "Diffuseur Social",
+          "role": "Distribution Auto",
+          "desc": "Publie votre contenu aux moments optimaux sur tous les réseaux sociaux"
+        },
+        "analytics": {
+          "name": "Pro Analytics",
+          "role": "Optimisation Continue",
+          "desc": "Analyse les performances et optimise automatiquement vos campagnes"
+        },
+        "manager": {
+          "name": "Chef de Campagne",
+          "role": "Orchestration Complète",
+          "desc": "Coordone tous vos agents pour créer des campagnes marketing cohérentes"
+        },
+        "strategy": {
+          "name": "Conseiller Stratégique",
+          "role": "Insights Stratégiques",
+          "desc": "Analyse votre marché et recommande les meilleures stratégies"
+        }
+      }
+    },
+    "pricing": {
+      "badge": "💰 Tarification Simple",
+      "titlePre": "Choisissez votre",
+      "titleGradient": "Plan Parfait",
+      "subtitle": "Une tarification transparente et accessible pour les entreprises de toutes tailles",
+      "month": "/mois",
+      "starter": {
+        "title": "Starter",
+        "cta": "Commencer",
+        "features": [
+          "10 agents IA actifs",
+          "500 leads/mois",
+          "50 contenus/mois",
+          "2 comptes LinkedIn",
+          "Support Email"
+        ]
+      },
+      "pro": {
+        "tag": "🔥 POPULAIRE",
+        "title": "Professionnel",
+        "cta": "Démarrer Maintenant",
+        "features": [
+          "48 agents IA actifs",
+          "2 000 leads/mois",
+          "200 contenus/mois",
+          "10 comptes LinkedIn",
+          "Support Prioritaire 24/7",
+          "Entraînement Personnalisé"
+        ]
+      },
+      "enterprise": {
+        "title": "Entreprise",
+        "price": "Sur mesure",
+        "period": "/personnalisé",
+        "cta": "Nous Contacter",
+        "features": [
+          "Agents IA Illimités",
+          "Leads Illimités",
+          "Contenu Illimité",
+          "Comptes Illimités",
+          "Account Manager Dédié",
+          "SLA 99.9% Garanti",
+          "Intégrations Sur Mesure"
+        ]
+      }
+    },
+    "megaCta": {
+      "title": "Prêt à Transformer Votre Marketing ?",
+      "subtitle": "Rejoignez les entreprises qui ont multiplié leur croissance par 10 avec AstroGrowth",
+      "cta": "🚀 Démarrer Gratuitement - Sans Carte Bancaire"
+    },
+    "footer": {
+      "description": "La plateforme d'automatisation marketing propulsée par l'IA pour toutes les entreprises. De la prospection à la conversion en pilote automatique, partout dans le monde.",
+      "columns": {
+        "product": "Produit",
+        "resources": "Ressources",
+        "company": "Entreprise"
+      },
+      "links": {
+        "features": "Fonctionnalités",
+        "agents": "Agents IA",
+        "pricing": "Tarifs",
+        "integrations": "Intégrations",
+        "docs": "Documentation",
+        "blog": "Blog",
+        "cases": "Études de Cas",
+        "support": "Support",
+        "about": "À Propos",
+        "careers": "Carrières",
+        "contact": "Contact",
+        "legal": "Légal"
+      },
+      "copyright": "Propulsé par"
     }
   },
   "dashboard": {
