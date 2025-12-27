@@ -240,6 +240,7 @@
   },
   "nav": {
     "home": "Accueil",
+    "dashboard": "Tableau de Bord",
     "campaigns": "Campagnes",
     "agents": "Agents",
     "content": "Contenus",
