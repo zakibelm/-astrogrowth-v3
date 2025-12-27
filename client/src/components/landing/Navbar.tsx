@@ -21,8 +21,8 @@ export default function Navbar() {
         <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'py-4 bg-white/95 shadow-lg backdrop-blur-md' : 'py-6 bg-white/80 backdrop-blur-md border-b border-black/5'
             }`}>
             <div className="nav-container flex items-center justify-between px-8 max-w-[1400px] mx-auto">
-                <div className="landing-logo text-2xl">
-                    🚀 AstroGrowth
+                <div className="landing-logo text-2xl font-bold">
+                    🚀 <span className="bg-gradient-to-r from-[#022c22] via-[#10b981] to-[#8b5cf6] bg-clip-text text-transparent">AstroGrowth</span>
                 </div>
                 <div className="nav-menu hidden lg:flex items-center gap-8">
                     <a href="#features" className="hover:text-emerald-600 transition-colors">{t('landing.nav.features')}</a>

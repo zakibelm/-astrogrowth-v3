@@ -128,7 +128,7 @@ export default function DashboardV2() {
           >
             <div>
               <div className="flex items-center gap-3 mb-3">
-                <h1 className="text-5xl font-bold bg-gradient-to-r from-foreground via-primary to-purple-600 bg-clip-text text-transparent">
+                <h1 className="text-5xl font-bold bg-gradient-to-r from-[#022c22] via-[#10b981] to-[#8b5cf6] bg-clip-text text-transparent">
                   {t('dashboard.title')}
                 </h1>
                 <Badge variant="secondary" className="px-3 py-1 text-xs font-semibold bg-primary/10 text-primary border-primary/20">
