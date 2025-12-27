@@ -1,0 +1,160 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "confirm": "Confirm",
+    "search": "Search"
+  },
+  "landing": {
+    "hero": {
+      "badge": "🌍 Global Solution • 48 AI Agents • Full Automation",
+      "titlePre": "Your ",
+      "titleGradient": "AI-Powered",
+      "titlePost": "Marketing Agency",
+      "subtitle": "From prospecting to conversion on autopilot. 10x faster, 80% cheaper than traditional agencies. Built for businesses worldwide.",
+      "ctaStart": "Get Started",
+      "ctaDemo": "Watch Demo",
+      "stats": {
+        "faster": "Faster Growth",
+        "cheaper": "Cost Reduction",
+        "specialists": "AI Specialists",
+        "automation": "Automation"
+      }
+    },
+    "nav": {
+      "features": "Features",
+      "agents": "Agents",
+      "pricing": "Pricing",
+      "getStarted": "Get Started"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "live": "Live",
+    "subtitle": "Real-time overview of your marketing campaigns",
+    "newCampaign": "New Campaign",
+    "stats": {
+      "leads": "Leads Generated",
+      "leadsDesc": "Total prospects identified",
+      "contents": "Content Created",
+      "contentsDesc": "Marketing posts generated",
+      "published": "Posts Published",
+      "publishedDesc": "LinkedIn publications",
+      "engagement": "Total Engagement",
+      "engagementDesc": "Likes, comments and shares"
+    },
+    "metrics": {
+      "title": "Metrics Evolution",
+      "description": "Growth of leads, content and publications over the last 7 days",
+      "days7": "7 days",
+      "days30": "30 days",
+      "days90": "90 days"
+    },
+    "engagement": {
+      "title": "Engagement Details",
+      "description": "Performance of your LinkedIn posts",
+      "likes": "Likes",
+      "comments": "Comments",
+      "shares": "Shares",
+      "impressions": "Impressions"
+    },
+    "activeCampaigns": {
+      "title": "Active Campaigns",
+      "running": "running",
+      "empty": "No active campaigns",
+      "create": "Create Campaign",
+      "status": "Running",
+      "leads": "leads",
+      "content": "content",
+      "published": "published"
+    },
+    "recentContent": {
+      "title": "Recent Content",
+      "generated": "generated",
+      "empty": "No content generated",
+      "status": {
+        "published": "Published",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "pending": "Pending"
+      },
+      "score": "Score"
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "campaigns": "Campaigns",
+    "agents": "Agents",
+    "content": "Content",
+    "settings": "Settings",
+    "workflows": "Workflows"
+  },
+  "workflows": {
+    "title": "Workflow Templates",
+    "subtitle": "Activate a pre-configured workflow in 1 click",
+    "available": "workflows available",
+    "configure": "Configure",
+    "activate": "Activate",
+    "agents": "agents",
+    "perMonth": "/month"
+  },
+  "configure": {
+    "title": "Workflow Configuration",
+    "step": "Step",
+    "of": "of",
+    "businessInfo": "Business Information",
+    "businessName": "Business name",
+    "country": "Country",
+    "address": "Address",
+    "city": "City",
+    "province": "State/Province/Region",
+    "postalCode": "Postal code",
+    "phone": "Phone",
+    "website": "Website",
+    "sector": "Industry sector",
+    "description": "Business description",
+    "currency": "Preferred currency",
+    "marketingGoals": "Marketing Goals",
+    "primaryGoal": "Primary goal",
+    "leadsPerMonth": "Leads per month",
+    "budget": "Monthly budget",
+    "targetAudience": "Target audience",
+    "uniqueSellingPoint": "Unique selling proposition",
+    "workflowMission": "Workflow Mission",
+    "objective": "Strategic objective",
+    "kpis": "KPIs and metrics",
+    "timeline": "Timeline and milestones",
+    "constraints": "Constraints",
+    "agentPreferences": "Agent Preferences",
+    "contentTone": "Content tone",
+    "postingFrequency": "Posting frequency",
+    "responseTime": "Response time",
+    "customInstructions": "Custom instructions",
+    "summary": "Summary",
+    "activateWorkflow": "Activate Workflow"
+  },
+  "agents": {
+    "title": "AI Agent Team",
+    "subtitle": "Your complete marketing team",
+    "active": "active",
+    "search": "Search for an agent...",
+    "all": "All",
+    "direction": "Management",
+    "prospection": "Prospection",
+    "content": "Content",
+    "community": "Community",
+    "advertising": "Advertising",
+    "analytics": "Analytics",
+    "ops": "Operations",
+    "success": "Success",
+    "configure": "Configure",
+    "enable": "Enable",
+    "disable": "Disable"
+  }
+}
