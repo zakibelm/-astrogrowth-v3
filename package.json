@@ -44,6 +44,7 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
     "date-fns": "^3.6.0",
+    "drizzle-orm": "^0.45.1",
     "embla-carousel-react": "^8.3.0",
     "framer-motion": "^11.0.28",
     "gsap": "^3.14.2",
@@ -71,6 +72,7 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.15",
     "@types/node": "^20.16.11",
+    "@types/pg": "^8.16.0",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.2",

@@ -8,8 +8,6 @@ sources:
     database: ${DB_NAME}
     queryParams:
       sslmode: require
-      options: "project=ep-flat-shape-ahnri4k-pooler"
-      options: "project=ep-flat-shape-ahnri4k-pooler"
 tools:
   list_users:
     kind: postgres-sql

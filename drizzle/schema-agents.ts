@@ -1,30 +1,32 @@
-import { mysqlTable, int, varchar, text, timestamp, mysqlEnum, boolean } from "drizzle-orm/mysql-core";
+import { pgTable, serial, integer, varchar, text, timestamp, boolean, pgEnum } from "drizzle-orm/pg-core";
 
 /**
  * AI Agents configuration table
  * Each agent has its own LLM model, system prompt, and RAG documents
  */
-export const agents = mysqlTable("agents", {
-  id: int("id").autoincrement().primaryKey(),
-  userId: int("userId").notNull(),
-  
+export const agentTypeEnum = pgEnum("agent_type", ["lead_scraper", "content_generator", "publisher", "analyzer"]);
+
+export const agents = pgTable("agents", {
+  id: serial("id").primaryKey(),
+  userId: integer("userId").notNull(),
+
   // Agent identification
   name: varchar("name", { length: 255 }).notNull(), // "Lead Scraper", "Content Generator", etc.
-  type: mysqlEnum("type", ["lead_scraper", "content_generator", "publisher", "analyzer"]).notNull(),
+  type: agentTypeEnum("type").notNull(),
   description: text("description"),
-  
+
   // LLM Configuration
   model: varchar("model", { length: 100 }).notNull().default("gemini-2.0-flash"), // claude-sonnet-4, gemini-2.0-flash, llama-3.3-70b, gpt-4
   systemPrompt: text("systemPrompt").notNull(), // Custom system prompt
-  temperature: int("temperature").default(70), // 0-100 (will be divided by 100)
-  maxTokens: int("maxTokens").default(2000),
-  
+  temperature: integer("temperature").default(70), // 0-100 (will be divided by 100)
+  maxTokens: integer("maxTokens").default(2000),
+
   // Status
   enabled: boolean("enabled").default(true).notNull(),
-  
+
   // Metadata
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type Agent = typeof agents.$inferSelect;
@@ -34,21 +36,21 @@ export type InsertAgent = typeof agents.$inferInsert;
  * RAG documents uploaded for each agent
  * Documents are stored in S3, references stored here
  */
-export const agentDocuments = mysqlTable("agent_documents", {
-  id: int("id").autoincrement().primaryKey(),
-  agentId: int("agentId").notNull(),
-  
+export const agentDocuments = pgTable("agent_documents", {
+  id: serial("id").primaryKey(),
+  agentId: integer("agentId").notNull(),
+
   // File information
   fileName: varchar("fileName", { length: 255 }).notNull(),
   fileUrl: text("fileUrl").notNull(), // S3 URL
   fileKey: text("fileKey").notNull(), // S3 key for deletion
-  fileSize: int("fileSize").notNull(), // bytes
+  fileSize: integer("fileSize").notNull(), // bytes
   mimeType: varchar("mimeType", { length: 100 }).notNull(),
-  
+
   // Processing status
   processed: boolean("processed").default(false).notNull(),
   vectorized: boolean("vectorized").default(false).notNull(), // For future vector DB integration
-  
+
   // Metadata
   uploadedAt: timestamp("uploadedAt").defaultNow().notNull(),
 });

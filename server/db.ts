@@ -1,5 +1,7 @@
 import { eq, desc, and, sql } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/mysql2";
+import { drizzle } from "drizzle-orm/node-postgres";
+import pg from "pg";
+const { Pool } = pg;
 import {
   InsertUser, users,
   campaigns, Campaign, InsertCampaign,
@@ -17,7 +19,11 @@ let _db: ReturnType<typeof drizzle> | null = null;
 export async function getDb() {
   if (!_db && process.env.DATABASE_URL) {
     try {
-      _db = drizzle(process.env.DATABASE_URL);
+      const pool = new Pool({
+        connectionString: process.env.DATABASE_URL,
+        ssl: { rejectUnauthorized: false }
+      });
+      _db = drizzle(pool);
     } catch (error) {
       console.warn("[Database] Failed to connect:", error);
       _db = null;
@@ -80,7 +86,9 @@ export async function upsertUser(user: InsertUser): Promise<void> {
       updateSet.lastSignedIn = new Date();
     }
 
-    await db.insert(users).values(values).onDuplicateKeyUpdate({
+    // Postgres upsert: onConflictDoUpdate
+    await db.insert(users).values(values).onConflictDoUpdate({
+      target: users.openId,
       set: updateSet,
     });
   } catch (error) {
@@ -143,8 +151,8 @@ export async function createCampaign(campaign: InsertCampaign): Promise<number> 
   const db = await getDb();
   if (!db) throw new Error("Database not available");
 
-  const result = await db.insert(campaigns).values(campaign);
-  return Number(result[0].insertId);
+  const result = await db.insert(campaigns).values(campaign).returning({ id: campaigns.id });
+  return result[0].id;
 }
 
 export async function getCampaignsByUserId(userId: number): Promise<Campaign[]> {
@@ -184,8 +192,8 @@ export async function createLead(lead: InsertLead): Promise<number> {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
 
-  const result = await db.insert(leads).values(lead);
-  return Number(result[0].insertId);
+  const result = await db.insert(leads).values(lead).returning({ id: leads.id });
+  return result[0].id;
 }
 
 export async function createLeadsBatch(leadsList: InsertLead[]): Promise<void> {
@@ -226,8 +234,8 @@ export async function createContent(content: InsertContent): Promise<number> {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
 
-  const result = await db.insert(contents).values(content);
-  return Number(result[0].insertId);
+  const result = await db.insert(contents).values(content).returning({ id: contents.id });
+  return result[0].id;
 }
 
 export async function getContentsByCampaignId(campaignId: number): Promise<Content[]> {
@@ -305,8 +313,8 @@ export async function createNotification(notification: InsertNotification): Prom
   const db = await getDb();
   if (!db) throw new Error("Database not available");
 
-  const result = await db.insert(notifications).values(notification);
-  return Number(result[0].insertId);
+  const result = await db.insert(notifications).values(notification).returning({ id: notifications.id });
+  return result[0].id;
 }
 
 export async function getNotificationsByUserId(userId: number, unreadOnly: boolean = false): Promise<Notification[]> {

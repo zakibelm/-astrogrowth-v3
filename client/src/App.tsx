@@ -23,7 +23,7 @@ import WorkflowCreator from "@/pages/WorkflowCreator";
 import AgentCreator from "@/pages/AgentCreator";
 import WorkflowConfigure from "./pages/WorkflowConfigure";
 import MyWorkflow from "./pages/MyWorkflow";
-import PlatformConnections from "./pages/PlatformConnectionsV2Fixed";
+import PlatformConnections from "./pages/PlatformConnections";
 import AgentWorkflows from "./pages/AgentWorkflows";
 import AppLayout from "./components/AppLayout";
 
@@ -90,7 +90,7 @@ function Router() {
       <Route path={"/settings/connections"}>
         <AppLayout><PlatformConnections /></AppLayout>
       </Route>
-      <Route path={"/workflows"}>
+      <Route path={"/agent-workflows"}>
         <AppLayout><AgentWorkflows /></AppLayout>
       </Route>
       <Route path={"/404"} component={NotFound} />
@@ -102,7 +102,7 @@ function Router() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="light">
+      <ThemeProvider defaultTheme="dark">
         <TooltipProvider>
           <Toaster />
           <Router />
