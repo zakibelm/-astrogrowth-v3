@@ -318,18 +318,21 @@ export default function Home() {
         <div className="act act-2">
           <div className="split-layout">
             {/* Left: Narrative */}
-            <div className="narrative-col">
-              <span className="text-indigo-400 font-bold text-[10px] uppercase tracking-[0.6em] mb-6 block italic">Architecture Neurale</span>
-              <h2 className="text-5xl lg:text-7xl font-black uppercase title-mask mb-8 tracking-tighter leading-[0.9] italic">8 Piliers<br />de Puissance</h2>
-              <p className="text-slate-400 text-lg mb-10 max-w-md leading-relaxed">
-                Chaque pôle est une unité de commande autonome. De la stratégie à la conversion, rien n'est laissé au hasard.
-              </p>
-              <ul className="feature-list">
-                <li><span className="text-2xl">🎯</span> <b>Strategy Unit</b> <span className="text-sm opacity-50"> // Planification</span></li>
-                <li><span className="text-2xl">🖋️</span> <b>Content Core</b> <span className="text-sm opacity-50"> // Création</span></li>
-                <li><span className="text-2xl">🎨</span> <b>Creative Lab</b> <span className="text-sm opacity-50"> // Design</span></li>
-                <li><span className="text-2xl">⚡</span> <b>Perf Tuning</b> <span className="text-sm opacity-50"> // Optimisation</span></li>
-              </ul>
+            <div className="narrative-col text-left">
+              <span className="text-indigo-400 font-bold text-[10px] uppercase tracking-[0.6em] mb-4 block italic">Architecture de Commandement</span>
+              <h2 className="text-4xl lg:text-5xl font-black uppercase title-mask mb-6 tracking-tighter leading-[0.9] italic">Synergie<br />Opérationnelle</h2>
+
+              <div className="space-y-6 text-slate-300 text-base lg:text-lg leading-relaxed max-w-lg">
+                <p>
+                  <b className="text-white">Mission :</b> Orchestrer votre croissance avec une précision militaire. Nos 8 pôles ne sont pas de simples catégories, ce sont des centres de commandement autonomes qui structurent l'effort de guerre commercial.
+                </p>
+                <p>
+                  <b className="text-white">L'avantage Tactique :</b> Pourquoi segmenter l'intelligence ? Parce qu'un agent généraliste ne suffit pas. En divisant les compétences ( Stratégie, Création, Données, etc. ), nous garantissons que chaque micro-tâche est exécutée par un spécialiste absolu.
+                </p>
+                <p className="text-sm border-l-2 border-indigo-500 pl-4 italic text-slate-400">
+                  "Un écosystème où la stratégie nourrit la création, et où la donnée valide l'intuition en temps réel."
+                </p>
+              </div>
             </div>
             {/* Right: Visual */}
             <div className="visual-col">
@@ -342,30 +345,30 @@ export default function Home() {
         <div className="act act-3">
           <div className="split-layout">
             {/* Left: Narrative & Customization */}
-            <div className="narrative-col">
-              <span className="text-emerald-400 font-bold text-[10px] uppercase tracking-[0.6em] mb-6 block italic">Personnalisation Totale</span>
-              <h2 className="text-5xl lg:text-7xl font-black uppercase title-mask mb-8 tracking-tighter leading-[0.9] italic">Flux Neural<br />Adaptatif</h2>
-              <p className="text-slate-400 text-lg mb-10 max-w-md leading-relaxed">
-                Façonnez vos agents selon vos règles. L'IA n'est plus une boîte noire, c'est votre outil de précision.
-              </p>
-              <ul className="feature-list text-sm">
-                <li>
-                  <div className="w-8 h-8 rounded bg-indigo-500/20 flex items-center justify-center text-indigo-400 font-bold">01</div>
-                  <div><b>Création Illimitée</b><br />Générez de nouveaux agents à la demande.</div>
-                </li>
-                <li>
-                  <div className="w-8 h-8 rounded bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold">02</div>
-                  <div><b>Cerveau Adaptable</b><br />Choix du LLM (GPT-4, Claude 3.5, Gemini).</div>
-                </li>
-                <li>
-                  <div className="w-8 h-8 rounded bg-pink-500/20 flex items-center justify-center text-pink-400 font-bold">03</div>
-                  <div><b>Injection RAG</b><br />Importez votre propre base de connaissance.</div>
-                </li>
-                <li>
-                  <div className="w-8 h-8 rounded bg-orange-500/20 flex items-center justify-center text-orange-400 font-bold">04</div>
-                  <div><b>Prompt Engineering</b><br />Contrôle total des instructions système.</div>
-                </li>
-              </ul>
+            <div className="narrative-col text-left">
+              <span className="text-emerald-400 font-bold text-[10px] uppercase tracking-[0.6em] mb-4 block italic">Personnalisation Totale</span>
+              <h2 className="text-4xl lg:text-5xl font-black uppercase title-mask mb-6 tracking-tighter leading-[0.9] italic">Votre Cerveau,<br />Vos Règles</h2>
+
+              <div className="space-y-6 text-slate-300 text-base lg:text-lg leading-relaxed max-w-lg">
+                <p>
+                  Ne louez pas une IA, <b className="text-white">construisez la vôtre</b>. AstroGrowth vous donne les clés du moteur pour une pertinence absolue.
+                </p>
+
+                <div className="bg-white/5 p-4 rounded-xl border border-white/10 space-y-3">
+                  <div>
+                    <h4 className="font-bold text-white text-sm uppercase flex items-center gap-2"><span className="text-emerald-400">01.</span> Choix du Modèle (LLM)</h4>
+                    <p className="text-xs text-slate-400">Décidez qui pilote : la créativité de <span className="text-slate-300">Claude 3.5</span> ou la logique implacable de <span className="text-slate-300">GPT-4o</span>. Adaptez le cerveau à la tâche.</p>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-white text-sm uppercase flex items-center gap-2"><span className="text-purple-400">02.</span> Injection Système</h4>
+                    <p className="text-xs text-slate-400">Définissez la personnalité, le ton, et les règles strictes via des prompts système avancés. Ils ne dévieront jamais de votre ligne directrice.</p>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-white text-sm uppercase flex items-center gap-2"><span className="text-orange-400">03.</span> RAG & Connaissance</h4>
+                    <p className="text-xs text-slate-400">Nourrissez vos agents avec vos propres données (PDF, Docs). Ils deviennent les experts mondiaux de *votre* entreprise.</p>
+                  </div>
+                </div>
+              </div>
             </div>
             {/* Right: Visual */}
             <div className="visual-col">
