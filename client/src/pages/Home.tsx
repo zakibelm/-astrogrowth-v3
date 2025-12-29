@@ -60,8 +60,11 @@ export default function Home() {
         const card = document.createElement('div');
         card.className = 'neural-card';
         card.innerHTML = isPoles ? `<b>0${(i % 8) + 1}</b><span>${item.icon} ${item.name}</span>` : `<b>AI</b><span>${item}</span>`;
+        // Centering fix for absolute positioning
+        card.style.left = "50%";
+        card.style.top = "50%";
+        // Styles for agents
         if (!isPoles) {
-          // Make agents more readable
           card.style.background = "rgba(10, 10, 20, 0.6)";
           card.style.borderColor = "rgba(99, 102, 241, 0.3)";
         }
@@ -71,16 +74,19 @@ export default function Home() {
           // Check if component is still mounted
           if (!document.body.contains(card)) return;
 
-          const duration = isPoles ? 7 + Math.random() * 4 : 8 + Math.random() * 6; // Slower duration for agents
-          const startX = (Math.random() - 0.5) * 80; // Spread out more effectively
-          const startY = (Math.random() - 0.5) * 60;
+          const duration = isPoles ? 7 + Math.random() * 4 : 8 + Math.random() * 6;
+          // Use % relative to container (visual-col) instead of vw/vh to prevent bleeding
+          // Container is 50vw wide roughly. +/- 50% stays inside.
+          const startX = (Math.random() - 0.5) * 80; // +/- 40%
+          const startY = (Math.random() - 0.5) * 60; // +/- 30%
 
           if (isPoles) {
-            // Poles: Aggressive Zoom (Keep as is mostly, but smoother)
             gsap.fromTo(card,
               {
-                x: `${(Math.random() - 0.5) * 10}vw`,
-                y: `${(Math.random() - 0.5) * 10}vh`,
+                xPercent: -50, // Center pivot
+                yPercent: -50,
+                x: `${startX}%`,
+                y: `${startY}%`,
                 z: -2000,
                 autoAlpha: 0,
                 scale: 0.1,
@@ -95,27 +101,26 @@ export default function Home() {
               }
             );
           } else {
-            // Agents: Gentle Float / Orbit style
-            // Start further out but visible, floating towards user but slower and cleaner
             gsap.fromTo(card,
               {
-                x: `${startX}vw`,
-                y: `${startY}vh`,
-                z: -1000 + Math.random() * 500, // Varied start depth
+                xPercent: -50,
+                yPercent: -50,
+                x: `${startX}%`,
+                y: `${startY}%`,
+                z: -1000 + Math.random() * 500,
                 autoAlpha: 0,
                 scale: 0.5,
               },
               {
-                z: 500, // Don't come too close to face
+                z: 500,
                 autoAlpha: 1,
-                scale: 1, // Consistent readable scale
+                scale: 1,
                 duration: duration,
                 ease: "sine.inOut",
                 repeat: -1,
-                yoyo: true, // Float back and forth slightly
+                yoyo: true,
                 onRepeat: () => {
-                  // Randomize slightly on repeat for "alive" feel
-                  gsap.set(card, { x: `+=${(Math.random() - 0.5) * 10}vw` });
+                  gsap.set(card, { x: `+=${(Math.random() - 0.5) * 10}%` });
                 }
               }
             );

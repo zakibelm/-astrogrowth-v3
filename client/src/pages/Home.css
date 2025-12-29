@@ -146,11 +146,14 @@
 
 .visual-col {
     position: relative;
-    /* overflow: visible; Allow vortex to bleed out slightly if needed, or hidden */
+    overflow: hidden;
+    /* Strict containment */
     display: flex;
     align-items: center;
     justify-content: center;
     perspective: 1500px;
+    border-radius: 20px;
+    /* Optional: adds a bit of modernity */
 }
 
 /* Feature List */
