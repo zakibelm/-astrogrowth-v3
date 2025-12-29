@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import Footer from "@/components/landing/Footer";
 import "./Home.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -194,7 +195,11 @@ export default function Home() {
             });
           }
         });
-      });
+      })
+
+      // Footer (Act 6)
+      .to(".act-5", { autoAlpha: 0, scale: 0.9, duration: 1.5 }, "+=1")
+      .to(".act-6", { autoAlpha: 1, duration: 1.5 }, "-=1");
 
     // Progress Bar
     gsap.to("#progress-bar", {
@@ -387,6 +392,11 @@ export default function Home() {
               <p className="text-[11px] font-bold text-slate-500 uppercase tracking-[0.3em]">Qualifié</p>
             </div>
           </div>
+        </div>
+
+        {/* footer */}
+        <div className="act act-6 w-full">
+          <Footer />
         </div>
 
       </div>
