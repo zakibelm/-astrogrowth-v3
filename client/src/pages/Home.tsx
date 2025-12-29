@@ -59,50 +59,83 @@ export default function Home() {
         const card = document.createElement('div');
         card.className = 'neural-card';
         card.innerHTML = isPoles ? `<b>0${(i % 8) + 1}</b><span>${item.icon} ${item.name}</span>` : `<b>AI</b><span>${item}</span>`;
+        if (!isPoles) {
+          // Make agents more readable
+          card.style.background = "rgba(10, 10, 20, 0.6)";
+          card.style.borderColor = "rgba(99, 102, 241, 0.3)";
+        }
         container.appendChild(card);
 
         const animate = () => {
           // Check if component is still mounted
           if (!document.body.contains(card)) return;
 
-          const duration = isPoles ? 7 + Math.random() * 4 : 3.5 + Math.random() * 5;
-          const startX = (Math.random() - 0.5) * 5;
-          const startY = (Math.random() - 0.5) * 5;
+          const duration = isPoles ? 7 + Math.random() * 4 : 8 + Math.random() * 6; // Slower duration for agents
+          const startX = (Math.random() - 0.5) * 80; // Spread out more effectively
+          const startY = (Math.random() - 0.5) * 60;
 
-          gsap.fromTo(card,
-            {
-              x: `${startX}vw`,
-              y: `${startY}vh`,
-              z: -4000,
-              autoAlpha: 0,
-              scale: 0.1,
-              filter: "blur(20px)"
-            },
-            {
-              z: 2000,
-              autoAlpha: 1,
-              filter: "blur(0px)",
-              scale: isPoles ? 3 : 2.5,
-              duration: duration,
-              ease: "none",
-              onComplete: animate
-            }
-          );
+          if (isPoles) {
+            // Poles: Aggressive Zoom (Keep as is mostly, but smoother)
+            gsap.fromTo(card,
+              {
+                x: `${(Math.random() - 0.5) * 10}vw`,
+                y: `${(Math.random() - 0.5) * 10}vh`,
+                z: -2000,
+                autoAlpha: 0,
+                scale: 0.1,
+              },
+              {
+                z: 1500,
+                autoAlpha: 1,
+                scale: 3,
+                duration: duration,
+                ease: "none",
+                onComplete: animate
+              }
+            );
+          } else {
+            // Agents: Gentle Float / Orbit style
+            // Start further out but visible, floating towards user but slower and cleaner
+            gsap.fromTo(card,
+              {
+                x: `${startX}vw`,
+                y: `${startY}vh`,
+                z: -1000 + Math.random() * 500, // Varied start depth
+                autoAlpha: 0,
+                scale: 0.5,
+              },
+              {
+                z: 500, // Don't come too close to face
+                autoAlpha: 1,
+                scale: 1, // Consistent readable scale
+                duration: duration,
+                ease: "sine.inOut",
+                repeat: -1,
+                yoyo: true, // Float back and forth slightly
+                onRepeat: () => {
+                  // Randomize slightly on repeat for "alive" feel
+                  gsap.set(card, { x: `+=${(Math.random() - 0.5) * 10}vw` });
+                }
+              }
+            );
 
-          gsap.to(card, {
-            x: `+=${(Math.random() - 0.5) * 60}vw`,
-            y: `+=${(Math.random() - 0.5) * 40}vh`,
-            duration: duration,
-            ease: "sine.inOut"
-          });
+            // Add a separate subtle continuous rotation/drift
+            gsap.to(card, {
+              rotation: (Math.random() - 0.5) * 10,
+              duration: duration * 1.5,
+              ease: "sine.inOut",
+              repeat: -1,
+              yoyo: true
+            });
+          }
         }
 
-        setTimeout(animate, i * (isPoles ? 800 : 150));
+        setTimeout(animate, i * (isPoles ? 800 : 200));
       }
     };
 
     generateVortex('poles-vortex', polesData, 8, true);
-    generateVortex('agents-vortex', agentNames, 65, false);
+    generateVortex('agents-vortex', agentNames, 24, false); // Reduced count for clarity
 
     // --- MASTER SCROLL ---
     const mainTl = gsap.timeline({
@@ -110,7 +143,7 @@ export default function Home() {
         trigger: ".scroll-container",
         start: "top top",
         end: "bottom bottom",
-        scrub: 1.2
+        scrub: 0.5 // Snappier scroll
       }
     });
 
