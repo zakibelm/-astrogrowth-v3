@@ -120,6 +120,58 @@
     visibility: visible;
 }
 
+/* --- SPLIT LAYOUT --- */
+.split-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    z-index: 50;
+}
+
+@media (min-width: 1024px) {
+    .split-layout {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.narrative-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem 4rem;
+    z-index: 60;
+}
+
+.visual-col {
+    position: relative;
+    /* overflow: visible; Allow vortex to bleed out slightly if needed, or hidden */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1500px;
+}
+
+/* Feature List */
+.feature-list li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    color: #94a3b8;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+}
+
+.feature-list b {
+    color: white;
+}
+
 /* --- VORTEX CARD SYSTEM --- */
 .vortex-container {
     position: absolute;

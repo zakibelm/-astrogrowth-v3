@@ -309,22 +309,64 @@ export default function Home() {
           </div>
         </div>
 
-        {/* ACTE 2: LES 8 PÔLES */}
+        {/* ACTE 2: LES 8 PÔLES (Split Screen) */}
         <div className="act act-2">
-          <div className="absolute top-24 text-center z-50">
-            <h2 className="text-4xl lg:text-7xl font-black uppercase title-mask mb-2 tracking-tighter leading-none italic">8 PILIERS</h2>
-            <p className="text-indigo-400 font-bold text-[10px] uppercase tracking-[1em] ml-[1em]">Architecture de Commandement</p>
+          <div className="split-layout">
+            {/* Left: Narrative */}
+            <div className="narrative-col">
+              <span className="text-indigo-400 font-bold text-[10px] uppercase tracking-[0.6em] mb-6 block italic">Architecture Neurale</span>
+              <h2 className="text-5xl lg:text-7xl font-black uppercase title-mask mb-8 tracking-tighter leading-[0.9] italic">8 Piliers<br />de Puissance</h2>
+              <p className="text-slate-400 text-lg mb-10 max-w-md leading-relaxed">
+                Chaque pôle est une unité de commande autonome. De la stratégie à la conversion, rien n'est laissé au hasard.
+              </p>
+              <ul className="feature-list">
+                <li><span className="text-2xl">🎯</span> <b>Strategy Unit</b> <span className="text-sm opacity-50"> // Planification</span></li>
+                <li><span className="text-2xl">🖋️</span> <b>Content Core</b> <span className="text-sm opacity-50"> // Création</span></li>
+                <li><span className="text-2xl">🎨</span> <b>Creative Lab</b> <span className="text-sm opacity-50"> // Design</span></li>
+                <li><span className="text-2xl">⚡</span> <b>Perf Tuning</b> <span className="text-sm opacity-50"> // Optimisation</span></li>
+              </ul>
+            </div>
+            {/* Right: Visual */}
+            <div className="visual-col">
+              <div className="vortex-container relative w-full h-full" id="poles-vortex"></div>
+            </div>
           </div>
-          <div className="vortex-container" id="poles-vortex"></div>
         </div>
 
-        {/* ACTE 3: LE FLUX NEURAL */}
+        {/* ACTE 3: LE FLUX NEURAL (Split Screen) */}
         <div className="act act-3">
-          <div className="absolute top-24 text-center z-50">
-            <h2 className="text-4xl lg:text-[7rem] font-black uppercase title-mask mb-2 tracking-tighter leading-none italic">FLUX NEURAL</h2>
-            <p className="text-indigo-400 font-bold text-[10px] uppercase tracking-[1em] ml-[1em]">48 Unités en Mouvement Perpétuel</p>
+          <div className="split-layout">
+            {/* Left: Narrative & Customization */}
+            <div className="narrative-col">
+              <span className="text-emerald-400 font-bold text-[10px] uppercase tracking-[0.6em] mb-6 block italic">Personnalisation Totale</span>
+              <h2 className="text-5xl lg:text-7xl font-black uppercase title-mask mb-8 tracking-tighter leading-[0.9] italic">Flux Neural<br />Adaptatif</h2>
+              <p className="text-slate-400 text-lg mb-10 max-w-md leading-relaxed">
+                Façonnez vos agents selon vos règles. L'IA n'est plus une boîte noire, c'est votre outil de précision.
+              </p>
+              <ul className="feature-list text-sm">
+                <li>
+                  <div className="w-8 h-8 rounded bg-indigo-500/20 flex items-center justify-center text-indigo-400 font-bold">01</div>
+                  <div><b>Création Illimitée</b><br />Générez de nouveaux agents à la demande.</div>
+                </li>
+                <li>
+                  <div className="w-8 h-8 rounded bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold">02</div>
+                  <div><b>Cerveau Adaptable</b><br />Choix du LLM (GPT-4, Claude 3.5, Gemini).</div>
+                </li>
+                <li>
+                  <div className="w-8 h-8 rounded bg-pink-500/20 flex items-center justify-center text-pink-400 font-bold">03</div>
+                  <div><b>Injection RAG</b><br />Importez votre propre base de connaissance.</div>
+                </li>
+                <li>
+                  <div className="w-8 h-8 rounded bg-orange-500/20 flex items-center justify-center text-orange-400 font-bold">04</div>
+                  <div><b>Prompt Engineering</b><br />Contrôle total des instructions système.</div>
+                </li>
+              </ul>
+            </div>
+            {/* Right: Visual */}
+            <div className="visual-col">
+              <div className="vortex-container relative w-full h-full" id="agents-vortex"></div>
+            </div>
           </div>
-          <div className="vortex-container" id="agents-vortex"></div>
         </div>
 
         {/* ACTE 4: TERMINAL */}
