@@ -1,0 +1,191 @@
+/* --- CURSEUR EXPERT --- */
+@media (pointer: fine) {
+    .neural-landing {
+        cursor: none;
+    }
+
+    .neural-landing #cursor-dot {
+        display: block;
+    }
+}
+
+#cursor-dot {
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 10000;
+    mix-blend-mode: difference;
+    display: none;
+}
+
+#cursor-glow {
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+/* --- BACKGROUND DYNAMIQUE --- */
+.tech-grid {
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: radial-gradient(circle at center, black, transparent 85%);
+    z-index: 0;
+}
+
+.stars-container {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle var(--duration) infinite;
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0.1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* --- TYPO --- */
+.hero-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.5rem, 10vw, 9.5rem);
+    line-height: 0.82;
+    letter-spacing: -0.06em;
+    font-weight: 700;
+}
+
+.title-mask {
+    background: linear-gradient(to bottom, #fff 60%, rgba(255, 255, 255, 0.2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #818cf8, #10B981, #f472b6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* --- STAGE NARRATIF --- */
+.stage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 10;
+    perspective: 2000px;
+}
+
+.act {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    will-change: transform, opacity;
+}
+
+/* Hero visible initialement */
+.act-0 {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- VORTEX CARD SYSTEM --- */
+.vortex-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.neural-card {
+    position: absolute;
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    visibility: hidden;
+    /* Caché avant le calcul initial de GSAP */
+    z-index: 1;
+}
+
+.neural-card b {
+    font-size: 11px;
+    color: var(--primary);
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.neural-card span {
+    font-size: 11px;
+    font-weight: 700;
+    color: white;
+    opacity: 0.95;
+}
+
+.glass {
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+}
+
+.scroll-container {
+    height: 1000vh;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #6366f1, #10B981);
+    width: 0%;
+    z-index: 10001;
+}
