@@ -27,72 +27,84 @@ import PlatformConnections from "./pages/PlatformConnections";
 import AgentWorkflows from "./pages/AgentWorkflows";
 import AppLayout from "./components/AppLayout";
 
+import AuthPage from "./pages/AuthPage";
+import AuthGuard from "./components/AuthGuard";
+import AdminGuard from "./components/AdminGuard";
+
 function Router() {
   return (
     <Switch>
       <Route path={"/"}>
         <Home />
       </Route>
+
+      {/* Public Auth Route */}
+      <Route path={"/auth"}>
+        <AuthPage />
+      </Route>
+
+      {/* Protected Routes */}
       <Route path={"/dashboard"}>
-        <AppLayout><Dashboard /></AppLayout>
+        <AuthGuard><AppLayout><Dashboard /></AppLayout></AuthGuard>
       </Route>
       <Route path={"/campaigns/new"}>
-        <AppLayout><NewCampaign /></AppLayout>
+        <AuthGuard><AppLayout><NewCampaign /></AppLayout></AuthGuard>
       </Route>
       <Route path={"/campaigns/:id"}>
-        <AppLayout><CampaignDetails /></AppLayout>
+        <AuthGuard><AppLayout><CampaignDetails /></AppLayout></AuthGuard>
       </Route>
       <Route path={"/campaigns/:campaignId/leads"}>
-        <AppLayout><LeadsList /></AppLayout>
+        <AuthGuard><AppLayout><LeadsList /></AppLayout></AuthGuard>
       </Route>
       <Route path={"/lead/:id"}>
-        <AppLayout><LeadDetails /></AppLayout>
+        <AuthGuard><AppLayout><LeadDetails /></AppLayout></AuthGuard>
       </Route>
       <Route path={"/content/:id"}>
-        <AppLayout><ContentApproval /></AppLayout>
+        <AuthGuard><AppLayout><ContentApproval /></AppLayout></AuthGuard>
       </Route>
       <Route path={"/campaigns"}>
-        <AppLayout><Campaigns /></AppLayout>
+        <AuthGuard><AppLayout><Campaigns /></AppLayout></AuthGuard>
       </Route>
       <Route path={"/contents"}>
-        <AppLayout><Contents /></AppLayout>
+        <AuthGuard><AppLayout><Contents /></AppLayout></AuthGuard>
       </Route>
       <Route path={"/profile"}>
-        <AppLayout><Profile /></AppLayout>
+        <AuthGuard><AppLayout><Profile /></AppLayout></AuthGuard>
       </Route>
       <Route path={"/analytics"}>
-        <AppLayout><Analytics /></AppLayout>
+        <AuthGuard><AppLayout><Analytics /></AppLayout></AuthGuard>
       </Route>
       <Route path={"/settings"}>
-        <AppLayout><Settings /></AppLayout>
+        <AdminGuard><AppLayout><Settings /></AppLayout></AdminGuard>
       </Route>
       <Route path={"/agents"}>
-        <AppLayout><AgentsTeamFull /></AppLayout>
+        <AuthGuard><AppLayout><AgentsTeamFull /></AppLayout></AuthGuard>
       </Route>
       <Route path={"/agents/create"}>
-        <AppLayout><AgentCreator /></AppLayout>
+        <AuthGuard><AppLayout><AgentCreator /></AppLayout></AuthGuard>
       </Route>
       <Route path={"/workflows"}>
-        <AppLayout><Workflows /></AppLayout>
+        <AuthGuard><AppLayout><Workflows /></AppLayout></AuthGuard>
       </Route>
       <Route path={"/workflows/create"}>
-        <AppLayout><WorkflowCreator /></AppLayout>
+        <AuthGuard><AppLayout><WorkflowCreator /></AppLayout></AuthGuard>
       </Route>
       <Route path={"/workflows/:id/configure"}>
-        <AppLayout><WorkflowConfigure /></AppLayout>
+        <AuthGuard><AppLayout><WorkflowConfigure /></AppLayout></AuthGuard>
       </Route>
       <Route path={"/my-workflow"}>
-        <AppLayout><MyWorkflow /></AppLayout>
+        <AuthGuard><AppLayout><MyWorkflow /></AppLayout></AuthGuard>
       </Route>
       <Route path={"/platforms"}>
-        <AppLayout><PlatformConnections /></AppLayout>
+        <AuthGuard><AppLayout><PlatformConnections /></AppLayout></AuthGuard>
       </Route>
       <Route path={"/settings/connections"}>
-        <AppLayout><PlatformConnections /></AppLayout>
+        <AdminGuard><AppLayout><PlatformConnections /></AppLayout></AdminGuard>
       </Route>
       <Route path={"/agent-workflows"}>
-        <AppLayout><AgentWorkflows /></AppLayout>
+        <AuthGuard><AppLayout><AgentWorkflows /></AppLayout></AuthGuard>
       </Route>
+
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>

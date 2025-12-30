@@ -18,6 +18,85 @@ export const appRouter = router({
         success: true,
       } as const;
     }),
+
+    login: publicProcedure
+      .input(z.object({
+        email: z.string().email(),
+        password: z.string().optional(),
+        name: z.string().optional(),
+        googleIdToken: z.string().optional(), // For Google Auth
+      }))
+      .mutation(async ({ input, ctx }) => {
+        const { sdk } = await import("./_core/sdk");
+
+        let openId = "";
+        let name = input.name;
+        let isAdmin = false;
+
+        // 1. ADMIN LOGIN FLOW
+        if (input.email === "zakibelm66@gmail.com" && input.password === "belz1204") {
+          console.log("[Auth] Admin Login detected");
+          openId = "admin-zakibelm66";
+          name = "Super Admin";
+          isAdmin = true;
+
+          // Upsert Admin User with role 'admin'
+          await db.upsertUser({
+            openId,
+            email: input.email,
+            name,
+            loginMethod: 'admin_password',
+            role: 'admin', // Enforce admin role
+            lastSignedIn: new Date(),
+          });
+        }
+        // 2. GOOGLE LOGIN FLOW
+        else if (input.googleIdToken) {
+          // Verify Google Token (Mock for now, or use library)
+          // In production, use: await verifyGoogleToken(input.googleIdToken)
+          console.log("[Auth] Google Login detected");
+          const googleProfile = await sdk.verifyGoogleToken(input.googleIdToken).catch(() => null);
+
+          if (!googleProfile) {
+            // Fallback for dev/mock if verification fails or not configured
+            openId = `google-${input.email.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`;
+          } else {
+            openId = googleProfile.sub;
+            name = googleProfile.name;
+          }
+
+          await db.upsertUser({
+            openId,
+            email: input.email,
+            name: name || input.email.split('@')[0],
+            loginMethod: 'google',
+            lastSignedIn: new Date(),
+          });
+        }
+        // 3. DEV/MAGIC LOGIN FLOW (Fallback)
+        else {
+          openId = `dev-${input.email.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`;
+          await db.upsertUser({
+            openId,
+            email: input.email,
+            name: input.name || input.email.split('@')[0],
+            loginMethod: 'email_dev',
+            lastSignedIn: new Date(),
+          });
+        }
+
+        // 4. Create Session
+        const sessionToken = await sdk.createSessionToken(openId, {
+          name: name || input.email,
+          expiresInMs: 30 * 24 * 60 * 60 * 1000,
+        });
+
+        // 5. Set Cookie
+        const cookieOptions = getSessionCookieOptions(ctx.req);
+        ctx.res.cookie(COOKIE_NAME, sessionToken, cookieOptions);
+
+        return { success: true, isAdmin };
+      }),
   }),
 
   // User profile management
@@ -59,22 +138,34 @@ export const appRouter = router({
         targetLocation: z.string().min(1),
       }))
       .mutation(async ({ ctx, input }) => {
-        const campaignId = await db.createCampaign({
-          userId: ctx.user.id,
-          ...input,
-          status: 'draft',
-        });
+        console.log("[API] campaigns.create called with input:", input);
+        try {
+          const campaignId = await db.createCampaign({
+            userId: ctx.user.id,
+            ...input,
+            status: 'draft',
+          });
+          console.log("[API] Campaign created with ID:", campaignId);
 
-        // Create notification
-        await db.createNotification({
-          userId: ctx.user.id,
-          type: 'campaign_created',
-          title: 'Nouvelle campagne créée',
-          message: `La campagne "${input.name}" a été créée avec succès.`,
-          campaignId,
-        });
+          // Create notification
+          await db.createNotification({
+            userId: ctx.user.id,
+            type: 'campaign_created',
+            title: 'Nouvelle campagne créée',
+            message: `La campagne "${input.name}" a été créée avec succès.`,
+            campaignId,
+          });
+          console.log("[API] Notification created for campaign:", campaignId);
 
-        return { id: campaignId };
+          return { id: campaignId };
+        } catch (error) {
+          console.error("[API] Error in campaigns.create:", error);
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: "Failed to create campaign",
+            cause: error,
+          });
+        }
       }),
 
     updateStatus: protectedProcedure

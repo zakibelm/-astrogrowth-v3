@@ -38,8 +38,10 @@ export const users = pgTable("users", {
   linkedinConnected: boolean("linkedinConnected").default(false).notNull(),
 
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().notNull(), // onUpdateNow() logic is handled by triggers or manual updates in PG, Drizzle uses $onUpdate generic usually but for simple schema just defaultNow is fine, we handle updates in code
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
   lastSignedIn: timestamp("lastSignedIn").defaultNow().notNull(),
+  // For password-based admin login
+  password: text("password"),
 });
 
 export type User = typeof users.$inferSelect;

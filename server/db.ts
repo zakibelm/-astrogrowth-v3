@@ -150,6 +150,7 @@ export async function updateLinkedInTokens(
 export async function createCampaign(campaign: InsertCampaign): Promise<number> {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
+  console.log("[DB] createCampaign called with:", campaign);
 
   const result = await db.insert(campaigns).values(campaign).returning({ id: campaigns.id });
   return result[0].id;
