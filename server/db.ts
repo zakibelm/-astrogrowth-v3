@@ -412,6 +412,11 @@ export async function getDashboardMetrics(userId: number) {
   }).from(contents).where(eq(contents.userId, userId));
 
   return {
+    totalLeads: Number(totalLeadsResult?.count || 0),
+    totalContents: Number(totalContentsResult?.count || 0),
+    totalPublished: Number(publishedResult?.count || 0),
+    totalLikes: Number(engagementResult?.totalLikes || 0),
+    totalComments: Number(engagementResult?.totalComments || 0),
     totalShares: Number(engagementResult?.totalShares || 0),
     totalImpressions: Number(engagementResult?.totalImpressions || 0),
   };
