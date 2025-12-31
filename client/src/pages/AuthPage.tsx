@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 
 export default function AuthPage() {
     const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
     const [, setLocation] = useLocation();
     const { t } = useTranslation();
